@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2022"
+  },
+	"typedocOptions": {
+		
+	  "entryPoints": [
+		"src/index.ts"
+	  ],
+	  "out": "docs"
+	}
+}
