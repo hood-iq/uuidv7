@@ -5,7 +5,7 @@
 	"typedocOptions": {
 		
 	  "entryPoints": [
-		"src/index.ts"
+		"uuid_v7.ts"
 	  ],
 	  "out": "docs"
 	}
