@@ -44,3 +44,11 @@ export default {
   uuid_generate_v7: uuid_generate_v7,
   uuid_decode_v7: uuid_decode_v7
 }
+
+/**
+ * Decodes the timestamp from a UUIDv7 string.
+ * The first 48 bits (12 hex chars) of a UUIDv7 are the timestamp.
+ * * @param {UUIDv7} uuid The UUIDv7 string.
+ * @returns {Date} A Date object representing the time the UUID was generated.
+ */
+export const getTimestampFromUUIDv7 = (uuid: UUIDv7): Date => new Date(uuid_decode_v7(uuid))
