@@ -1,4 +1,4 @@
-export type UUIDv7 = string & `{string}-{string}-7{string}-{a|b|8|9}{string}-{string}`;
+export type UUIDv7 = string & `${string}-${string}-7${string}-{a|b|8|9}${string}-${string}`;
 export const UUIDv7Regex = /^[0-9(a-f|A-F)]{8}-[0-9(a-f|A-F)]{4}-7[0-9(a-f|A-F)]{3}-[89ab][0-9(a-f|A-F)]{3}-[0-9(a-f|A-F)]{12}$/;
 export const isUUIDv7 = (s: string): s is UUIDv7 => s.match(UUIDv7Regex) != null;
 
