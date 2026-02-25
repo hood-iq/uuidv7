@@ -1,4 +1,4 @@
-export type UUIDv7 = string & `${string}-${string}-7${string}-{a|b|8|9}${string}-${string}`;
+export type UUIDv7 = string & `{string}-{string}-7{string}-{a|b|8|9}{string}-{string}`;
 export const UUIDv7Regex = /^[0-9(a-f|A-F)]{8}-[0-9(a-f|A-F)]{4}-7[0-9(a-f|A-F)]{3}-[89ab][0-9(a-f|A-F)]{3}-[0-9(a-f|A-F)]{12}$/;
 export const isUUIDv7 = (s: string): s is UUIDv7 => s.match(UUIDv7Regex) != null;
 
@@ -18,12 +18,12 @@ export const isUUIDv7 = (s: string): s is UUIDv7 => s.match(UUIDv7Regex) != null
 */
 export const uuid_generate_v7 = (): UUIDv7 => {
   // get timestamp
-  const t = Date.now().toString(16).padEnd(12,'0');
+  const t = Date.now().toString(16).padStart(12,'0');
   // generate UUIDv4
   const r = crypto.randomUUID();
   // form UUIDv7 from timestamp and UUIDv4 (xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx)
-  return t.substring(0,8) + '-' 
-    + t.substring(8,12) + '-' 
+  return t.substring(0,8).padStart(8,'0') + '-' 
+    + t.substring(8,12).padStart(4,'0') + '-' 
     + '7' + r.substring(0,3) + '-' 
     + 'b' + r.substring(3,6) + '-' 
     + r.substring(24) as UUIDv7;
@@ -44,11 +44,3 @@ export default {
   uuid_generate_v7: uuid_generate_v7,
   uuid_decode_v7: uuid_decode_v7
 }
-
-/**
- * Decodes the timestamp from a UUIDv7 string.
- * The first 48 bits (12 hex chars) of a UUIDv7 are the timestamp.
- * * @param {UUIDv7} uuid The UUIDv7 string.
- * @returns {Date} A Date object representing the time the UUID was generated.
- */
-export const getTimestampFromUUIDv7 = (uuid: UUIDv7): Date => new Date(uuid_decode_v7(uuid))
